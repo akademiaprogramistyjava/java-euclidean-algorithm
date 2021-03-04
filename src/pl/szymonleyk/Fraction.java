@@ -1,3 +1,5 @@
+package pl.szymonleyk;
+
 public class Fraction {
     private int numerator;
     private int denumerator;
