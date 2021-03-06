@@ -19,13 +19,15 @@ public class FractionGenerator {
 
      */
     public boolean isCorrectSumOfFraction(Fraction actual){
-        int expectedDenumerator = gcd(first.getDenumerator(),second.getDenumerator());
-        int expectedFirstNumerator = first.getNumerator()/(first.getDenumerator()/expectedDenumerator);
-        int expectedSecondNumerator = second.getNumerator()/(second.getDenumerator()/expectedDenumerator);
+        int expectedDenumerator = first.getDenumerator()*second.getDenumerator();
+        int expectedFirstNumerator = first.getNumerator()*second.getDenumerator();
+        int expectedSecondNumerator = second.getNumerator()*first.getDenumerator();        
         int expectedNumerator = expectedFirstNumerator+expectedSecondNumerator;
-
-        System.out.println(expectedNumerator+"/"+expectedDenumerator);
-
+               
+        int greatestDivider = findGreatestDivider(expectedDenumerator,expectedNumerator);
+        expectedNumerator /= greatestDivider;
+        expectedDenumerator /= greatestDivider;
+        
         return actual.getNumerator() == expectedNumerator && actual.getDenumerator() == expectedDenumerator;
     }
 
@@ -33,7 +35,7 @@ public class FractionGenerator {
         return first +" + "+second+" = ";
     }
 
-    private int gcd(int a, int b){
+    private int findGreatestDivider(int a, int b){
         while(a != b){
             if(a < b){
                 b-=a;
